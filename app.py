@@ -550,3 +550,39 @@ Cost Per Person: ₹{per_person:,}
         st.markdown(f"**👤 You:** {chat['q']}")
         st.markdown(f"**🤖 AI Agent:** {chat['a']}")
         st.markdown("---")
+
+# ==============================================================================
+# WSGI Entrypoint Export for Serverless / Vercel Build Compatibility
+# ==============================================================================
+def handler(environ, start_response=None):
+    """WSGI entrypoint to prevent Vercel Python runtime build errors."""
+    if start_response:
+        status = '200 OK'
+        headers = [('Content-Type', 'text/html; charset=utf-8')]
+        start_response(status, headers)
+    html_content = """<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Smart Travel Agent</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #f8fafc; padding: 3rem; text-align: center; }
+        .card { background: #1e293b; border-radius: 16px; padding: 2rem; max-width: 600px; margin: 0 auto; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        h1 { background: linear-gradient(90deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        code { background: #334155; padding: 0.2rem 0.5rem; border-radius: 4px; color: #38bdf8; }
+        .btn { display: inline-block; background: #3b82f6; color: white; text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>✈️ AI Smart Travel Agent</h1>
+        <p>Deployed on <strong>Vercel</strong> Serverless Functions.</p>
+        <p>To run interactive Streamlit app locally:</p>
+        <p><code>streamlit run app.py</code></p>
+    </div>
+</body>
+</html>"""
+    return [html_content.encode('utf-8')]
+
+app = handler
+application = handler
+
