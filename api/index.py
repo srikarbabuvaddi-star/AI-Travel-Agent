@@ -3,6 +3,8 @@ import json
 import urllib.parse
 import datetime
 
+from template import INDEX_HTML
+
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         parsed_url = urllib.parse.urlparse(self.path)
@@ -46,17 +48,11 @@ class handler(BaseHTTPRequestHandler):
                 self.wfile.write(json.dumps({"error": str(e)}).encode('utf-8'))
                 return
 
-        # Main Single Page Application Route
-        try:
-            from app import INDEX_HTML
-            html = INDEX_HTML
-        except Exception as e:
-            html = f"<!DOCTYPE html><html><body><h1>AI Travel Agent</h1><p>Error loading interface: {e}</p></body></html>"
-
+        # Main Single Page Application Route (Instant load from template)
         self.send_response(200)
         self.send_header('Content-Type', 'text/html; charset=utf-8')
         self.end_headers()
-        self.wfile.write(html.encode('utf-8'))
+        self.wfile.write(INDEX_HTML.encode('utf-8'))
 
     def do_POST(self):
         parsed_url = urllib.parse.urlparse(self.path)
