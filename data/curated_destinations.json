@@ -1,0 +1,316 @@
+{
+  "goa": {
+    "city_name": "Goa",
+    "lat": 15.2993,
+    "lon": 74.1240,
+    "places": [
+      {
+        "name": "Baga Beach",
+        "category": "Beaches",
+        "rating": 4.6,
+        "address": "North Goa, Goa",
+        "lat": 15.5553,
+        "lon": 73.7517,
+        "duration": "3-4 hours",
+        "reason": "Famous for watersports, beach shacks, and vibrant evening atmosphere."
+      },
+      {
+        "name": "Aguada Fort",
+        "category": "Historical",
+        "rating": 4.5,
+        "address": "Candolim, Goa",
+        "lat": 15.4926,
+        "lon": 73.7737,
+        "duration": "2 hours",
+        "reason": "17th-century Portuguese lighthouse and fort offering sweeping sea views."
+      },
+      {
+        "name": "Basilica of Bom Jesus",
+        "category": "Culture / Religion",
+        "rating": 4.7,
+        "address": "Old Goa, Goa",
+        "lat": 15.5009,
+        "lon": 73.9116,
+        "duration": "1.5 hours",
+        "reason": "UNESCO World Heritage site containing the mortal remains of St. Francis Xavier."
+      },
+      {
+        "name": "Dudhsagar Falls",
+        "category": "Nature / Adventure",
+        "rating": 4.8,
+        "address": "Sonaulim, Goa",
+        "lat": 15.3144,
+        "lon": 74.3143,
+        "duration": "4-5 hours",
+        "reason": "Majestic four-tiered waterfall located on the Mandovi River."
+      },
+      {
+        "name": "Anjuna Flea Market",
+        "category": "Shopping",
+        "rating": 4.2,
+        "address": "Anjuna, Goa",
+        "lat": 15.5802,
+        "lon": 73.7431,
+        "duration": "2 hours",
+        "reason": "Famous open-air flea market perfect for souvenirs, handicrafts, and local snacks."
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Britto's Shack",
+        "cuisine": "Goan Seafood & Continental",
+        "rating": 4.5,
+        "address": "Baga Beach, North Goa",
+        "price_category": "Moderate (₹800 for two)",
+        "reason": "Iconic beach shack renowned for authentic Goan fish curry and baked crab."
+      },
+      {
+        "name": "Fisherman's Wharf",
+        "cuisine": "Seafood & Goan Classics",
+        "rating": 4.6,
+        "address": "Cavelossim, South Goa",
+        "price_category": "Luxury (₹1500 for two)",
+        "reason": "Riverside dining with live music and delicious local prawn curry."
+      },
+      {
+        "name": "Vinayak Family Restaurant",
+        "cuisine": "Vegetarian & Seafood Thali",
+        "rating": 4.4,
+        "address": "Assagao, Goa",
+        "price_category": "Budget (₹400 for two)",
+        "reason": "Popular local eatery serving traditional Goan fish thali and veg meals."
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Goa Marriott Resort & Spa",
+        "rating": 4.7,
+        "address": "Miramar, Panaji, Goa",
+        "estimated_price": "₹9,500/night",
+        "distance": "2 km from Panaji city center",
+        "reason": "5-star luxury beachfront resort with bay views."
+      },
+      {
+        "name": "Lemon Tree Amarante Beach Resort",
+        "rating": 4.4,
+        "address": "Candolim, Goa",
+        "estimated_price": "₹4,800/night",
+        "distance": "500m from Candolim Beach",
+        "reason": "Comfortable 4-star resort with swimming pool and great proximity to North Goa beaches."
+      },
+      {
+        "name": "Zostel Goa (Anjuna)",
+        "rating": 4.5,
+        "address": "Anjuna, Goa",
+        "estimated_price": "₹1,200/night",
+        "distance": "1 km from Anjuna Beach",
+        "reason": "Top-rated budget backpacker stay ideal for solo travelers and young groups."
+      }
+    ],
+    "healthcare": [
+      {
+        "name": "Manipal Hospital Goa",
+        "address": "Dona Paula, Panaji, Goa",
+        "distance": "5 km from city center",
+        "phone": "+91 832 664 4444",
+        "rating": 4.4
+      },
+      {
+        "name": "GMC (Goa Medical College Hospital)",
+        "address": "Bambolim, Goa",
+        "distance": "8 km from Panaji",
+        "phone": "+91 832 245 8700",
+        "rating": 4.2
+      }
+    ]
+  },
+  "hyderabad": {
+    "city_name": "Hyderabad",
+    "lat": 17.3850,
+    "lon": 78.4867,
+    "places": [
+      {
+        "name": "Charminar",
+        "category": "Historical / Culture",
+        "rating": 4.6,
+        "address": "Charminar Rd, Hyderabad",
+        "lat": 17.3616,
+        "lon": 78.4747,
+        "duration": "1.5 hours",
+        "reason": "Iconic 16th-century monument and mosque surrounded by bustling bazaars."
+      },
+      {
+        "name": "Golconda Fort",
+        "category": "Historical / Adventure",
+        "rating": 4.7,
+        "address": "Ibrahim Bagh, Hyderabad",
+        "lat": 17.3833,
+        "lon": 78.4011,
+        "duration": "3 hours",
+        "reason": "Massive citadel famous for its acoustic engineering and evening light show."
+      },
+      {
+        "name": "Ramoji Film City",
+        "category": "Entertainment",
+        "rating": 4.5,
+        "address": "Hayathnagar, Hyderabad",
+        "lat": 17.2543,
+        "lon": 78.6808,
+        "duration": "Full Day",
+        "reason": "World's largest film studio complex with theme park rides and stunt shows."
+      },
+      {
+        "name": "Hussain Sagar Lake & Buddha Statue",
+        "category": "Nature / Photography",
+        "rating": 4.4,
+        "address": "Necklace Road, Hyderabad",
+        "lat": 17.4239,
+        "lon": 78.4738,
+        "duration": "2 hours",
+        "reason": "Heart-shaped lake featuring a monolithic Buddha statue and boating facilities."
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Paradise Biryani",
+        "cuisine": "Hyderabadi Biryani & Mughlai",
+        "rating": 4.5,
+        "address": "Secunderabad / MG Road",
+        "price_category": "Moderate (₹600 for two)",
+        "reason": "World-famous destination for authentic Hyderabadi Dum Biryani."
+      },
+      {
+        "name": "Chutneys",
+        "cuisine": "South Indian Vegetarian",
+        "rating": 4.6,
+        "address": "Banjara Hills, Hyderabad",
+        "price_category": "Moderate (₹500 for two)",
+        "reason": "Famous for Guntur Idli, Steam Dosa, and signature 6 varieties of chutney."
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Taj Falaknuma Palace",
+        "rating": 4.9,
+        "address": "Engine Bowli, Falaknuma, Hyderabad",
+        "estimated_price": "₹28,000/night",
+        "distance": "5 km from Charminar",
+        "reason": "Ultra-luxury heritage palace hotel of the Nizams."
+      },
+      {
+        "name": "ITC Kakatiya",
+        "rating": 4.6,
+        "address": "Begumpet, Hyderabad",
+        "estimated_price": "₹6,500/night",
+        "distance": "3 km from Hussain Sagar",
+        "reason": "Premium 5-star luxury hotel in central Hyderabad."
+      },
+      {
+        "name": "Red Fox Hotel HITEC City",
+        "rating": 4.2,
+        "address": "HITEC City, Hyderabad",
+        "estimated_price": "₹3,200/night",
+        "distance": "Located in IT hub",
+        "reason": "Modern budget-friendly business hotel."
+      }
+    ],
+    "healthcare": [
+      {
+        "name": "Apollo Hospitals Jubilee Hills",
+        "address": "Jubilee Hills, Hyderabad",
+        "distance": "4 km from city center",
+        "phone": "+91 40 2360 7777",
+        "rating": 4.6
+      },
+      {
+        "name": "Yashoda Hospitals Somajiguda",
+        "address": "Raj Bhavan Rd, Somajiguda, Hyderabad",
+        "distance": "2 km from Hussain Sagar",
+        "phone": "+91 40 4567 4567",
+        "rating": 4.5
+      }
+    ]
+  },
+  "kerala": {
+    "city_name": "Kerala (Alleppey & Munnar)",
+    "lat": 9.4981,
+    "lon": 76.3388,
+    "places": [
+      {
+        "name": "Alleppey Backwaters Houseboat",
+        "category": "Nature / Culture",
+        "rating": 4.8,
+        "address": "Punnamada Lake, Alleppey",
+        "lat": 9.4981,
+        "lon": 76.3388,
+        "duration": "Overnight / 4 hours",
+        "reason": "Serene cruise through palm-fringed backwaters and lush rice paddies."
+      },
+      {
+        "name": "Tea Gardens of Munnar",
+        "category": "Nature / Photography",
+        "rating": 4.7,
+        "address": "Munnar, Kerala",
+        "lat": 10.0889,
+        "lon": 77.0595,
+        "duration": "3-4 hours",
+        "reason": "Rolling emerald tea plantations with misty mountain hillsides."
+      },
+      {
+        "name": "Eravikulam National Park",
+        "category": "Nature / Wildlife",
+        "rating": 4.6,
+        "address": "Munnar, Kerala",
+        "lat": 10.1500,
+        "lon": 77.0667,
+        "duration": "3 hours",
+        "reason": "Home to the endangered Nilgiri Tahr mountain goat and breathtaking peaks."
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Villa Maya",
+        "cuisine": "Kerala Seafood & Heritage Fine Dining",
+        "rating": 4.7,
+        "address": "Trivandrum / Alleppey Region",
+        "price_category": "Luxury (₹1600 for two)",
+        "reason": "Restored 18th-century Dutch manor serving traditional Malabar Karimeen pollichathu."
+      },
+      {
+        "name": "Karthik Hotel",
+        "cuisine": "South Indian Pure Veg",
+        "rating": 4.3,
+        "address": "Alleppey Town",
+        "price_category": "Budget (₹300 for two)",
+        "reason": "Authentic Kerala Sadhya served on banana leaf."
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Kumarakom Lake Resort",
+        "rating": 4.8,
+        "address": "Kumarakom, Kottayam, Kerala",
+        "estimated_price": "₹14,000/night",
+        "distance": "Overlooking Vembanad Lake",
+        "reason": "5-star luxury heritage resort with traditional Kerala architecture."
+      },
+      {
+        "name": "Spice Tree Munnar",
+        "rating": 4.6,
+        "address": "Mattupatti Road, Munnar",
+        "estimated_price": "₹5,500/night",
+        "distance": "Munnar hills",
+        "reason": "Scenic mountain valley resort surrounded by tea gardens."
+      }
+    ],
+    "healthcare": [
+      {
+        "name": "KIMSHEALTH Medical Center",
+        "address": "Trivandrum / Alleppey Highway",
+        "distance": "10 km",
+        "phone": "+91 471 294 1000",
+        "rating": 4.5
+      }
+    ]
+  }
+}
