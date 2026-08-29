@@ -558,36 +558,316 @@ def run_streamlit_app():
             st.markdown("---")
 
 # ==============================================================================
-# WSGI Entrypoint Export for Serverless / Vercel Build Compatibility
+# WSGI Entrypoint & Serverless Web App Renderer for Vercel Deployment
 # ==============================================================================
+import urllib.parse
+
+def render_html_app(plan: dict, inputs: dict) -> str:
+    dest_name = plan["destination"].title()
+    ai_score = plan["ai_score"]
+    budget_data = plan["budget_breakdown"]["data"]
+    total_cost = budget_data.get("total_group_cost", 36500)
+    per_person = budget_data.get("cost_per_person", 9125)
+    user_budget = budget_data.get("user_budget", 40000)
+    rem_balance = user_budget - total_cost
+
+    status_color = "#10b981" if rem_balance >= 0 else "#ef4444"
+    bal_text = f"Under budget (+₹{rem_balance:,})" if rem_balance >= 0 else f"Over budget (-₹{abs(rem_balance):,})"
+
+    # Weather forecast cards
+    weather_html = ""
+    w_res = plan.get("weather_forecast", {})
+    for idx, day_w in enumerate(w_res.get("data", [])):
+        weather_html += f"""
+        <div style="background: rgba(30,41,59,0.7); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:1rem; min-width:170px; flex:1;">
+            <div style="font-weight:700; color:#38bdf8;">{day_w.get('day', f'Day {idx+1}')}</div>
+            <div style="font-size:0.85rem; color:#94a3b8;">📅 {day_w.get('date', '')}</div>
+            <div style="font-size:1.5rem; margin:0.3rem 0;">{day_w.get('condition', '🌤️')}</div>
+            <div style="font-weight:600;">🌡️ {day_w.get('min_temp', '22°C')} – {day_w.get('max_temp', '30°C')}</div>
+            <div style="font-size:0.85rem; color:#cbd5e1; margin-top:0.3rem;">🌧️ Rain: {day_w.get('rain_prob', '10%')}</div>
+            <div style="font-size:0.8rem; color:#94a3b8; margin-top:0.4rem; background:rgba(0,0,0,0.2); padding:0.4rem; border-radius:6px;">💡 {day_w.get('recommendation', '')}</div>
+        </div>
+        """
+
+    # Day-by-day itinerary accordions
+    itinerary_html = ""
+    for day_item in plan.get("itinerary", []):
+        day_title = day_item.get("title", f"{day_item.get('day')} ({day_item.get('date')})")
+        places_tags = ", ".join([f"<span style='background:#334155; padding:2px 8px; border-radius:4px; font-size:0.85rem;'>{p}</span>" for p in day_item.get("places_visited", []) if p])
+        itinerary_html += f"""
+        <div style="background: rgba(30,41,59,0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.2rem; margin-bottom: 1rem;">
+            <div style="font-size: 1.2rem; font-weight: 700; color: #38bdf8; margin-bottom: 0.3rem;">📌 {day_title} — <span style="font-size:0.95rem; color:#94a3b8;">{day_item.get('weather_summary')}</span></div>
+            <div style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 0.8rem;">🗓️ Date: {day_item.get('date')} | {day_item.get('weather_note')}</div>
+            <div style="margin-bottom: 0.5rem;">{day_item.get('morning')}</div>
+            <div style="margin-bottom: 0.5rem;">{day_item.get('afternoon')}</div>
+            <div style="margin-bottom: 0.8rem;">{day_item.get('evening')}</div>
+            {f'<div style="margin-bottom: 0.5rem;">📍 <b>Attractions Visited:</b> {places_tags}</div>' if places_tags else ''}
+            <div>🍽️ <b>Dining Highlights:</b> {day_item.get('dining')}</div>
+        </div>
+        """
+
+    # Tourist Attractions Cards
+    places_html = ""
+    for p in plan.get("places", {}).get("data", []):
+        places_html += f"""
+        <div style="background: rgba(30,41,59,0.7); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:1rem; margin-bottom:0.8rem;">
+            <h4 style="color:#f8fafc; margin-bottom:0.3rem;">📍 {p.get('name')}</h4>
+            <div style="font-size:0.9rem; color:#94a3b8;"><b>Category:</b> {p.get('category')} | <b>Rating:</b> ⭐ {p.get('rating', '4.5')}</div>
+            <div style="font-size:0.85rem; color:#cbd5e1; margin-top:0.3rem;">⏱️ Suggested Duration: {p.get('duration', '2 hours')}</div>
+            <div style="font-size:0.85rem; color:#94a3b8; font-style:italic; margin-top:0.4rem;">{p.get('reason')}</div>
+        </div>
+        """
+
+    # Restaurant Cards
+    rests_html = ""
+    for r in plan.get("restaurants", {}).get("data", []):
+        rests_html += f"""
+        <div style="background: rgba(30,41,59,0.7); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:1rem; margin-bottom:0.8rem;">
+            <h4 style="color:#f8fafc; margin-bottom:0.3rem;">🍽️ {r.get('name')}</h4>
+            <div style="font-size:0.9rem; color:#94a3b8;"><b>Cuisine:</b> {r.get('cuisine')} | <b>Price:</b> {r.get('price_category')}</div>
+            <div style="font-size:0.85rem; color:#94a3b8; font-style:italic; margin-top:0.4rem;">{r.get('reason')}</div>
+        </div>
+        """
+
+    # Accommodation Cards
+    hotels_html = ""
+    for h in plan.get("hotels", {}).get("data", []):
+        hotels_html += f"""
+        <div style="background: rgba(30,41,59,0.7); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:1rem; margin-bottom:0.8rem;">
+            <h4 style="color:#f8fafc; margin-bottom:0.3rem;">🏨 {h.get('name')}</h4>
+            <div style="font-size:0.9rem; color:#94a3b8;">⭐ Rating: {h.get('rating')} | Est. Price: <span style="color:#10b981; font-weight:700;">{h.get('estimated_price')}</span></div>
+            <div style="font-size:0.85rem; color:#cbd5e1; margin-top:0.3rem;">Distance: {h.get('distance')}</div>
+            <div style="font-size:0.85rem; color:#94a3b8; font-style:italic; margin-top:0.4rem;">{h.get('reason')}</div>
+        </div>
+        """
+
+    # Transport Options Cards
+    trans_data = plan.get("transport", {}).get("data", {})
+    cheap = trans_data.get("cheapest_option", {})
+    best = trans_data.get("best_value_option", {})
+    fast = trans_data.get("fastest_option", {})
+    transport_html = f"""
+    <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1.5rem;">
+        <div style="background:rgba(30,41,59,0.7); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:1rem; flex:1; min-width:200px;">
+            <div style="color:#10b981; font-weight:700; font-size:0.85rem;">💚 CHEAPEST OPTION</div>
+            <h3 style="margin:0.4rem 0;">{cheap.get('mode', 'Bus')}</h3>
+            <div><b>Total Cost:</b> {cheap.get('total_group_cost')}</div>
+            <div><b>Per Person:</b> {cheap.get('per_person_cost')}</div>
+            <div><b>Duration:</b> {cheap.get('duration')}</div>
+        </div>
+        <div style="background:rgba(30,41,59,0.7); border:1px solid #38bdf8; border-radius:12px; padding:1rem; flex:1; min-width:200px;">
+            <div style="color:#38bdf8; font-weight:700; font-size:0.85rem;">⭐ BEST VALUE OPTION</div>
+            <h3 style="margin:0.4rem 0;">{best.get('mode', 'AC Train')}</h3>
+            <div><b>Total Cost:</b> {best.get('total_group_cost')}</div>
+            <div><b>Per Person:</b> {best.get('per_person_cost')}</div>
+            <div><b>Duration:</b> {best.get('duration')}</div>
+        </div>
+        <div style="background:rgba(30,41,59,0.7); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:1rem; flex:1; min-width:200px;">
+            <div style="color:#f59e0b; font-weight:700; font-size:0.85rem;">⚡ FASTEST OPTION</div>
+            <h3 style="margin:0.4rem 0;">{fast.get('mode', 'Flight')}</h3>
+            <div><b>Total Cost:</b> {fast.get('total_group_cost')}</div>
+            <div><b>Per Person:</b> {fast.get('per_person_cost')}</div>
+            <div><b>Duration:</b> {fast.get('duration')}</div>
+        </div>
+    </div>
+    """
+
+    # Healthcare Emergency Cards
+    health_html = ""
+    for h in plan.get("healthcare", {}).get("data", []):
+        health_html += f"""
+        <div style="background: rgba(30,41,59,0.7); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:1rem; margin-bottom:0.8rem;">
+            <h4 style="color:#f8fafc; margin-bottom:0.3rem;">🏥 {h.get('name')}</h4>
+            <div style="font-size:0.9rem; color:#94a3b8;">Address: {h.get('address')} ({h.get('distance')})</div>
+            <div style="font-size:0.9rem; color:#f59e0b; font-weight:700; margin-top:0.3rem;">📞 Emergency Phone: {h.get('phone')}</div>
+        </div>
+        """
+
+    # Budget Breakdown Table Rows
+    budget_rows = ""
+    for cat, val in plan.get("budget_breakdown", {}).get("data", {}).get("categories", {}).items():
+        budget_rows += f"<tr><td style='padding:0.6rem; border-bottom:1px solid rgba(255,255,255,0.05);'>{cat}</td><td style='padding:0.6rem; border-bottom:1px solid rgba(255,255,255,0.05); text-align:right; font-weight:600;'>₹{val:,}</td></tr>"
+
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✈️ AI Smart Travel Agent - {dest_name}</title>
+    <style>
+        * {{ box-sizing: border-box; margin: 0; padding: 0; }}
+        body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #f8fafc; min-height: 100vh; padding: 1.5rem; }}
+        .header {{ text-align: center; margin-bottom: 2rem; }}
+        .title {{ font-size: 2.5rem; font-weight: 800; background: linear-gradient(90deg, #38bdf8, #818cf8, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }}
+        .subtitle {{ color: #94a3b8; font-size: 1rem; margin-top: 0.4rem; }}
+        .layout {{ display: flex; gap: 1.5rem; flex-wrap: wrap; }}
+        .sidebar {{ flex: 1; min-width: 280px; max-width: 350px; background: #1e293b; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 1.5rem; height: fit-content; }}
+        .main-content {{ flex: 3; min-width: 320px; }}
+        .form-group {{ margin-bottom: 1rem; }}
+        .form-group label {{ display: block; font-size: 0.85rem; font-weight: 600; color: #94a3b8; margin-bottom: 0.3rem; }}
+        .form-group input, .form-group select {{ width: 100%; padding: 0.65rem 0.8rem; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: white; font-size: 0.95rem; }}
+        .btn-submit {{ width: 100%; padding: 0.8rem; background: linear-gradient(90deg, #3b82f6, #8b5cf6); border: none; border-radius: 8px; color: white; font-weight: 700; cursor: pointer; font-size: 1rem; margin-top: 0.5rem; }}
+        .btn-submit:hover {{ opacity: 0.9; }}
+        .metrics-grid {{ display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }}
+        .metric-card {{ flex: 1; min-width: 130px; background: #1e293b; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1rem; text-align: center; }}
+        .metric-title {{ font-size: 0.8rem; color: #94a3b8; font-weight: 600; text-transform: uppercase; }}
+        .metric-value {{ font-size: 1.6rem; font-weight: 700; margin-top: 0.2rem; color: #f8fafc; }}
+        .section-title {{ font-size: 1.4rem; font-weight: 700; margin: 1.5rem 0 1rem 0; color: #38bdf8; display: flex; align-items: center; gap: 0.5rem; }}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="title">✈️ AI Smart Travel Agent</div>
+        <div class="subtitle">Autonomous Multi-Tool Travel Agent powered by MCP Architecture</div>
+    </div>
+
+    <div class="layout">
+        <!-- SIDEBAR FORM -->
+        <div class="sidebar">
+            <h2 style="font-size: 1.2rem; margin-bottom: 1rem; color: #f8fafc;">✈️ Trip Parameters</h2>
+            <form method="GET" action="/">
+                <div class="form-group">
+                    <label>Destination City</label>
+                    <input type="text" name="destination" value="{inputs.get('destination', 'Goa')}" required />
+                </div>
+                <div class="form-group">
+                    <label>Starting City</label>
+                    <input type="text" name="starting_city" value="{inputs.get('starting_city', 'Hyderabad')}" required />
+                </div>
+                <div class="form-group">
+                    <label>Travelers</label>
+                    <input type="number" name="num_people" value="{inputs.get('num_people', 4)}" min="1" max="20" />
+                </div>
+                <div class="form-group">
+                    <label>Total Budget (₹)</label>
+                    <input type="number" name="budget" value="{inputs.get('budget', 40000)}" step="1000" />
+                </div>
+                <div class="form-group">
+                    <label>Travel Style</label>
+                    <select name="travel_style">
+                        <option value="Moderate" {"selected" if inputs.get("travel_style")=="Moderate" else ""}>Moderate</option>
+                        <option value="Budget" {"selected" if inputs.get("travel_style")=="Budget" else ""}>Budget</option>
+                        <option value="Luxury" {"selected" if inputs.get("travel_style")=="Luxury" else ""}>Luxury</option>
+                        <option value="Adventure" {"selected" if inputs.get("travel_style")=="Adventure" else ""}>Adventure</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-submit">✨ CREATE MY TRIP</button>
+            </form>
+        </div>
+
+        <!-- MAIN DASHBOARD CONTENT -->
+        <div class="main-content">
+            <!-- EXECUTIVE METRICS -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-title">⭐ AI Trip Score</div>
+                    <div class="metric-value" style="color: #38bdf8;">{ai_score} / 100</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">💰 Total Cost</div>
+                    <div class="metric-value">₹{total_cost:,}</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">👤 Per Person</div>
+                    <div class="metric-value">₹{per_person:,}</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">📊 Budget Status</div>
+                    <div class="metric-value" style="color: {status_color}; font-size: 1.1rem; margin-top:0.4rem;">{bal_text}</div>
+                </div>
+            </div>
+
+            <!-- WEATHER FORECAST -->
+            <div class="section-title">🌦️ Daily Weather Forecast ({dest_name})</div>
+            <div style="display:flex; gap:1rem; overflow-x:auto; margin-bottom:1.5rem;">
+                {weather_html}
+            </div>
+
+            <!-- DAY-BY-DAY ITINERARY -->
+            <div class="section-title">📅 Weather-Aware Day-by-Day Itinerary</div>
+            {itinerary_html}
+
+            <!-- PLACES & ATTRACTIONS -->
+            <div class="section-title">📍 Top Attractions & Places</div>
+            {places_html}
+
+            <!-- DINING & RESTAURANTS -->
+            <div class="section-title">🍽️ Recommended Dining</div>
+            {rests_html}
+
+            <!-- ACCOMMODATION -->
+            <div class="section-title">🏨 Hotel Options</div>
+            {hotels_html}
+
+            <!-- INTERCITY TRANSPORT -->
+            <div class="section-title">🚆 Intercity Transport Options</div>
+            {transport_html}
+
+            <!-- EMERGENCY HEALTHCARE -->
+            <div class="section-title">🏥 Emergency Healthcare</div>
+            {health_html}
+
+            <!-- ITEMITED BUDGET BREAKDOWN -->
+            <div class="section-title">💰 Itemized Budget Allocation</div>
+            <table style="width:100%; border-collapse:collapse; background:#1e293b; border-radius:12px; overflow:hidden;">
+                <thead>
+                    <tr style="background:#0f172a; color:#38bdf8;">
+                        <th style="padding:0.8rem; text-align:left;">Cost Category</th>
+                        <th style="padding:0.8rem; text-align:right;">Group Estimated Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {budget_rows}
+                    <tr style="background:#0f172a; font-weight:700;">
+                        <td style="padding:0.8rem;">TOTAL ESTIMATED COST</td>
+                        <td style="padding:0.8rem; text-align:right; color:#10b981;">₹{total_cost:,}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>"""
+
+
 def handler(environ, start_response=None):
-    """WSGI entrypoint to prevent Vercel Python runtime build errors."""
+    """WSGI entrypoint to execute AI Travel Agent and render responsive web dashboard."""
+    query_str = environ.get("QUERY_STRING", "") if environ else ""
+    params = urllib.parse.parse_qs(query_str)
+    
+    destination = params.get("destination", ["Goa"])[0]
+    starting_city = params.get("starting_city", ["Hyderabad"])[0]
+    num_people = int(params.get("num_people", ["4"])[0])
+    budget = float(params.get("budget", ["40000"])[0])
+    travel_style = params.get("travel_style", ["Moderate"])[0]
+    food_pref = params.get("food_pref", ["Seafood"])[0]
+
+    inputs = {
+        "destination": destination,
+        "starting_city": starting_city,
+        "start_date": str(datetime.date.today() + datetime.timedelta(days=7)),
+        "end_date": str(datetime.date.today() + datetime.timedelta(days=11)),
+        "num_people": num_people,
+        "budget": budget,
+        "trip_type": "Friends",
+        "travel_style": travel_style,
+        "food_pref": food_pref,
+        "interests": ["Beaches", "Culture", "Food"]
+    }
+
+    try:
+        agent = TravelAgentEngine()
+        plan = agent.plan_complete_trip(inputs)
+        html_content = render_html_app(plan, inputs)
+    except Exception as e:
+        html_content = f"<h1>Error generating trip plan: {e}</h1>"
+
     if start_response:
         status = '200 OK'
         headers = [('Content-Type', 'text/html; charset=utf-8')]
         start_response(status, headers)
-    html_content = """<!DOCTYPE html>
-<html>
-<head>
-    <title>AI Smart Travel Agent</title>
-    <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #f8fafc; padding: 3rem; text-align: center; }
-        .card { background: #1e293b; border-radius: 16px; padding: 2rem; max-width: 600px; margin: 0 auto; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
-        h1 { background: linear-gradient(90deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        code { background: #334155; padding: 0.2rem 0.5rem; border-radius: 4px; color: #38bdf8; }
-        .btn { display: inline-block; background: #3b82f6; color: white; text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; margin-top: 1rem; }
-    </style>
-</head>
-<body>
-    <div class="card">
-        <h1>✈️ AI Smart Travel Agent</h1>
-        <p>Deployed on <strong>Vercel</strong> Serverless Functions.</p>
-        <p>To run interactive Streamlit app locally:</p>
-        <p><code>streamlit run app.py</code></p>
-    </div>
-</body>
-</html>"""
     return [html_content.encode('utf-8')]
+
 
 app = handler
 application = handler
@@ -603,5 +883,6 @@ if __name__ == "__main__":
 else:
     if st.runtime.exists():
         run_streamlit_app()
+
 
 
