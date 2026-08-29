@@ -14,8 +14,13 @@ from tools.maps import get_map_route
 from tools.budget import calculate_budget_breakdown
 from services.optimizer import optimize_trip_budget
 
-# Initialize official Python MCP Server v2.0.0 instance
-mcp_server = MCPServer("AI-Smart-Travel-Agent-MCP")
+try:
+    from mcp.server.mcpserver import MCPServer
+    mcp_server = MCPServer("AI-Smart-Travel-Agent-MCP")
+    MCP_AVAILABLE = True
+except Exception:
+    mcp_server = None
+    MCP_AVAILABLE = False
 
 @mcp_server.tool()
 async def weather_tool(destination: str, start_date: str = "", end_date: str = "") -> str:
@@ -109,24 +114,25 @@ class MCPToolBridge:
         mcp_target = cls.TOOL_NAME_MAP.get(tool_name, tool_name)
         
         # 1. Try invoking via MCPServer.call_tool
-        try:
+        if MCP_AVAILABLE and mcp_server is not None:
             try:
-                loop = asyncio.get_running_loop()
-            except RuntimeError:
-                loop = asyncio.new_event_loop()
-                asyncio.set_event_loop(loop)
+                try:
+                    loop = asyncio.get_running_loop()
+                except RuntimeError:
+                    loop = asyncio.new_event_loop()
+                    asyncio.set_event_loop(loop)
 
-            if loop.is_running():
-                future = asyncio.run_coroutine_threadsafe(mcp_server.call_tool(mcp_target, kwargs), loop)
-                res = future.result(timeout=5)
-            else:
-                res = loop.run_until_complete(mcp_server.call_tool(mcp_target, kwargs))
+                if loop.is_running():
+                    future = asyncio.run_coroutine_threadsafe(mcp_server.call_tool(mcp_target, kwargs), loop)
+                    res = future.result(timeout=5)
+                else:
+                    res = loop.run_until_complete(mcp_server.call_tool(mcp_target, kwargs))
 
-            if res and res.content and len(res.content) > 0:
-                raw_text = res.content[0].text
-                return json.loads(raw_text)
-        except Exception:
-            pass
+                if res and res.content and len(res.content) > 0:
+                    raw_text = res.content[0].text
+                    return json.loads(raw_text)
+            except Exception:
+                pass
 
         # 2. Fallback direct function execution guarantee
         return cls._direct_tool_fallback(tool_name, kwargs)
