@@ -8,16 +8,17 @@ from utils.validation import validate_trip_inputs
 from utils.formatting import format_currency, get_source_badge_html
 from services.optimizer import optimize_trip_budget
 
-# Page configuration
-st.set_page_config(
-    page_title="AI Smart Travel Agent",
-    page_icon="✈️",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+def run_streamlit_app():
+    # Page configuration
+    st.set_page_config(
+        page_title="AI Smart Travel Agent",
+        page_icon="✈️",
+        layout="wide",
+        initial_sidebar_state="expanded"
+    )
 
-# Custom CSS for rich aesthetics and dark/glassmorphic theme elements
-st.markdown("""
+    # Custom CSS for rich aesthetics and dark/glassmorphic theme elements
+    st.markdown("""
 <style>
     .main-header {
         font-size: 2.4rem;
@@ -585,4 +586,9 @@ def handler(environ, start_response=None):
 
 app = handler
 application = handler
+
+# Execute Streamlit UI only when running under Streamlit runtime context
+if st.runtime.exists():
+    run_streamlit_app()
+
 
