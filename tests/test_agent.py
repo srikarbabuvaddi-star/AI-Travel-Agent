@@ -53,5 +53,17 @@ class TestTravelAgentEngine(unittest.TestCase):
         answer = self.agent.chat_with_trip(self.plan, "Which transport option is cheapest?")
         self.assertTrue(len(answer) > 10)
 
+    def test_itinerary_day_uniqueness(self):
+        itinerary = self.plan.get("itinerary", [])
+        self.assertTrue(len(itinerary) >= 5)
+
+        # Check titles are distinct
+        titles = [day.get("title") for day in itinerary if day.get("title")]
+        self.assertEqual(len(titles), len(set(titles)), "Each day must have a unique title/theme")
+
+        # Check places visited across consecutive days do not repeat identically
+        visited_lists = [tuple(day.get("places_visited", [])) for day in itinerary]
+        self.assertEqual(len(visited_lists), len(set(visited_lists)), "Attractions visited per day must be distinct")
+
 if __name__ == "__main__":
     unittest.main()

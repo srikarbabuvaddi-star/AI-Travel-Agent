@@ -82,5 +82,20 @@ class TestTravelTools(unittest.TestCase):
         self.assertTrue(len(res["data"]) >= 3)
         self.assertIn("Reykjavik", res["data"][0]["name"])
 
+    def test_archetype_distinct_city_data(self):
+        paris_places = DynamicCityEstimator.get_fallback_places("Paris")["data"]
+        kyoto_places = DynamicCityEstimator.get_fallback_places("Kyoto")["data"]
+        delhi_places = DynamicCityEstimator.get_fallback_places("Delhi")["data"]
+
+        paris_names = [p["name"] for p in paris_places]
+        kyoto_names = [p["name"] for p in kyoto_places]
+        delhi_names = [p["name"] for p in delhi_places]
+
+        # Verify no cross-city name collision or copy-paste templates
+        self.assertNotEqual(paris_names, kyoto_names)
+        self.assertNotEqual(paris_names, delhi_names)
+        self.assertTrue(any("Temple" in n or "Shrine" in n for n in kyoto_names))
+        self.assertTrue(any("Tower" in n or "Louvre" in n or "Cathedral" in n or "Plaza" in n for n in paris_names))
+
 if __name__ == "__main__":
     unittest.main()

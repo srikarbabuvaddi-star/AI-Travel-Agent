@@ -110,20 +110,17 @@ class MCPToolBridge:
         
         # 1. Try invoking via MCPServer.call_tool
         try:
-            loop = None
             try:
                 loop = asyncio.get_running_loop()
             except RuntimeError:
-                pass
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
 
-            if loop and loop.is_running():
-                # Loop running: execute coroutine in thread pool
-                import concurrent.futures
-                with concurrent.futures.ThreadPoolExecutor() as pool:
-                    future = pool.submit(asyncio.run, mcp_server.call_tool(mcp_target, kwargs))
-                    res = future.result(timeout=10)
+            if loop.is_running():
+                future = asyncio.run_coroutine_threadsafe(mcp_server.call_tool(mcp_target, kwargs), loop)
+                res = future.result(timeout=5)
             else:
-                res = asyncio.run(mcp_server.call_tool(mcp_target, kwargs))
+                res = loop.run_until_complete(mcp_server.call_tool(mcp_target, kwargs))
 
             if res and res.content and len(res.content) > 0:
                 raw_text = res.content[0].text

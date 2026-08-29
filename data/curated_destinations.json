@@ -231,85 +231,595 @@
       }
     ]
   },
-  "kerala": {
-    "city_name": "Kerala (Alleppey & Munnar)",
-    "lat": 9.4981,
-    "lon": 76.3388,
+  "delhi": {
+    "city_name": "Delhi",
+    "lat": 28.6139,
+    "lon": 77.2090,
     "places": [
       {
-        "name": "Alleppey Backwaters Houseboat",
-        "category": "Nature / Culture",
-        "rating": 4.8,
-        "address": "Punnamada Lake, Alleppey",
-        "lat": 9.4981,
-        "lon": 76.3388,
-        "duration": "Overnight / 4 hours",
-        "reason": "Serene cruise through palm-fringed backwaters and lush rice paddies."
-      },
-      {
-        "name": "Tea Gardens of Munnar",
-        "category": "Nature / Photography",
-        "rating": 4.7,
-        "address": "Munnar, Kerala",
-        "lat": 10.0889,
-        "lon": 77.0595,
-        "duration": "3-4 hours",
-        "reason": "Rolling emerald tea plantations with misty mountain hillsides."
-      },
-      {
-        "name": "Eravikulam National Park",
-        "category": "Nature / Wildlife",
+        "name": "Red Fort (Lal Qila)",
+        "category": "Historical",
         "rating": 4.6,
-        "address": "Munnar, Kerala",
-        "lat": 10.1500,
-        "lon": 77.0667,
+        "address": "Netaji Subhash Marg, Chandni Chowk, New Delhi",
+        "lat": 28.6562,
+        "lon": 77.2410,
+        "duration": "2.5 hours",
+        "reason": "Iconic 17th-century Mughal fort constructed from red sandstone."
+      },
+      {
+        "name": "Qutub Minar",
+        "category": "Historical / Architecture",
+        "rating": 4.7,
+        "address": "Mehrauli, New Delhi",
+        "lat": 28.5245,
+        "lon": 77.1855,
+        "duration": "2 hours",
+        "reason": "UNESCO World Heritage site featuring the world's tallest brick minaret."
+      },
+      {
+        "name": "Humayun's Tomb",
+        "category": "Historical / Culture",
+        "rating": 4.7,
+        "address": "Nizamuddin East, New Delhi",
+        "lat": 28.5933,
+        "lon": 77.2507,
+        "duration": "2 hours",
+        "reason": "Magnificent Mughal garden tomb that inspired the Taj Mahal."
+      },
+      {
+        "name": "India Gate & Kartavya Path",
+        "category": "Photography / Monument",
+        "rating": 4.6,
+        "address": "Rajpath, New Delhi",
+        "lat": 28.6129,
+        "lon": 77.2295,
+        "duration": "1.5 hours",
+        "reason": "Prominent war memorial arch surrounded by lush manicured lawns."
+      },
+      {
+        "name": "Chandni Chowk Bazaar",
+        "category": "Shopping / Food",
+        "rating": 4.5,
+        "address": "Old Delhi",
+        "lat": 28.6506,
+        "lon": 77.2303,
         "duration": "3 hours",
-        "reason": "Home to the endangered Nilgiri Tahr mountain goat and breathtaking peaks."
+        "reason": "Bustling historic market famous for spices, street food, and silver jewelry."
       }
     ],
     "restaurants": [
       {
-        "name": "Villa Maya",
-        "cuisine": "Kerala Seafood & Heritage Fine Dining",
-        "rating": 4.7,
-        "address": "Trivandrum / Alleppey Region",
-        "price_category": "Luxury (₹1600 for two)",
-        "reason": "Restored 18th-century Dutch manor serving traditional Malabar Karimeen pollichathu."
+        "name": "Bukhara - ITC Maurya",
+        "cuisine": "North Western Frontier & Tandoori",
+        "rating": 4.8,
+        "address": "Chanakyapuri, New Delhi",
+        "price_category": "Luxury (₹4500 for two)",
+        "reason": "World-celebrated restaurant famous for Dal Bukhara and tandoori kebabs."
       },
       {
-        "name": "Karthik Hotel",
-        "cuisine": "South Indian Pure Veg",
-        "rating": 4.3,
-        "address": "Alleppey Town",
-        "price_category": "Budget (₹300 for two)",
-        "reason": "Authentic Kerala Sadhya served on banana leaf."
+        "name": "Karim's Old Delhi",
+        "cuisine": "Mughlai & Kebabs",
+        "rating": 4.5,
+        "address": "Gali Kababian, Jama Masjid, Delhi",
+        "price_category": "Moderate (₹800 for two)",
+        "reason": "Legendary culinary institution serving slow-cooked mutton stew and seekh kebabs."
+      },
+      {
+        "name": "Saravana Bhavan (Connaught Place)",
+        "cuisine": "Pure Veg South Indian",
+        "rating": 4.4,
+        "address": "CP Outer Circle, New Delhi",
+        "price_category": "Budget (₹450 for two)",
+        "reason": "Popular spot for crisp dosas, mini tiffin, and authentic filter coffee."
       }
     ],
     "hotels": [
       {
-        "name": "Kumarakom Lake Resort",
+        "name": "The Imperial New Delhi",
         "rating": 4.8,
-        "address": "Kumarakom, Kottayam, Kerala",
+        "address": "Janpath, Connaught Place, New Delhi",
         "estimated_price": "₹14,000/night",
-        "distance": "Overlooking Vembanad Lake",
-        "reason": "5-star luxury heritage resort with traditional Kerala architecture."
+        "distance": "1 km from CP center",
+        "reason": "Iconic heritage luxury hotel blending Victorian and Art Deco design."
       },
       {
-        "name": "Spice Tree Munnar",
-        "rating": 4.6,
-        "address": "Mattupatti Road, Munnar",
+        "name": "Radisson Blu Marina CP",
+        "rating": 4.4,
+        "address": "Connaught Circus, New Delhi",
         "estimated_price": "₹5,500/night",
-        "distance": "Munnar hills",
-        "reason": "Scenic mountain valley resort surrounded by tea gardens."
+        "distance": "Heart of central Delhi",
+        "reason": "Boutique hotel located right in central shopping district."
+      },
+      {
+        "name": "Bloomrooms @ Janpath",
+        "rating": 4.3,
+        "address": "Janpath Road, New Delhi",
+        "estimated_price": "₹2,800/night",
+        "distance": "500m from metro station",
+        "reason": "Sleek, bright budget stay with immaculate cleanliness and high speed WiFi."
       }
     ],
     "healthcare": [
       {
-        "name": "KIMSHEALTH Medical Center",
-        "address": "Trivandrum / Alleppey Highway",
-        "distance": "10 km",
-        "phone": "+91 471 294 1000",
+        "name": "AIIMS (All India Institute of Medical Sciences)",
+        "address": "Sri Aurobindo Marg, Ansari Nagar, New Delhi",
+        "distance": "3 km from South Delhi",
+        "phone": "+91 11 2658 8500",
+        "rating": 4.7
+      },
+      {
+        "name": "Max Super Speciality Hospital Saket",
+        "address": "Press Enclave Marg, Saket, New Delhi",
+        "distance": "5 km from Qutub Minar",
+        "phone": "+91 11 2651 5050",
+        "rating": 4.6
+      }
+    ]
+  },
+  "mumbai": {
+    "city_name": "Mumbai",
+    "lat": 18.9220,
+    "lon": 72.8347,
+    "places": [
+      {
+        "name": "Gateway of India",
+        "category": "Historical / Monument",
+        "rating": 4.7,
+        "address": "Apollo Bunder, Colaba, Mumbai",
+        "lat": 18.9220,
+        "lon": 72.8347,
+        "duration": "1.5 hours",
+        "reason": "Historic waterfront arch monument overlooking the Arabian Sea."
+      },
+      {
+        "name": "Marine Drive Promenade",
+        "category": "Photography / Leisure",
+        "rating": 4.8,
+        "address": "Netaji Subhash Chandra Bose Road, Mumbai",
+        "lat": 18.9440,
+        "lon": 72.8230,
+        "duration": "2 hours",
+        "reason": "C-shaped coastal boulevard known as the Queen's Necklace."
+      },
+      {
+        "name": "Chhatrapati Shivaji Maharaj Terminus (CSMT)",
+        "category": "Architecture / Heritage",
+        "rating": 4.7,
+        "address": "Fort, Mumbai",
+        "lat": 18.9398,
+        "lon": 72.8355,
+        "duration": "1 hour",
+        "reason": "UNESCO World Heritage Victorian Gothic railway terminal."
+      },
+      {
+        "name": "Elephanta Caves",
+        "category": "Culture / Island Tour",
+        "rating": 4.6,
+        "address": "Elephanta Island, Mumbai Harbour",
+        "lat": 18.9633,
+        "lon": 72.9315,
+        "duration": "4 hours",
+        "reason": "Ancient rock-cut cave temples dedicated to Lord Shiva accessible by ferry."
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Britannia & Co. Restaurant",
+        "cuisine": "Parsi & Iranian Classics",
+        "rating": 4.6,
+        "address": "Ballard Estate, Fort, Mumbai",
+        "price_category": "Moderate (₹900 for two)",
+        "reason": "Legendary heritage café famous for Berry Pulao and Dhansak."
+      },
+      {
+        "name": "Trishna Restaurant",
+        "cuisine": "Seafood & Mangalorean",
+        "rating": 4.7,
+        "address": "Kala Ghoda, Fort, Mumbai",
+        "price_category": "Luxury (₹2200 for two)",
+        "reason": "World renowned for Butter Garlic Crab and Koliwada Prawns."
+      }
+    ],
+    "hotels": [
+      {
+        "name": "The Taj Mahal Palace Mumbai",
+        "rating": 4.9,
+        "address": "Apollo Bunder, Colaba, Mumbai",
+        "estimated_price": "₹22,000/night",
+        "distance": "Facing Gateway of India",
+        "reason": "Iconic 5-star flagship luxury hotel built in 1903."
+      },
+      {
+        "name": "Trident Nariman Point",
+        "rating": 4.6,
+        "address": "Nariman Point, Marine Drive, Mumbai",
+        "estimated_price": "₹8,500/night",
+        "distance": "Marine Drive promenade",
+        "reason": "Premium skyscraper hotel with panoramic ocean views."
+      }
+    ],
+    "healthcare": [
+      {
+        "name": "Bombay Hospital & Medical Research Centre",
+        "address": "Marine Lines, Mumbai",
+        "distance": "2 km from Churchgate",
+        "phone": "+91 22 2206 7676",
         "rating": 4.5
+      },
+      {
+        "name": "Lilavati Hospital & Research Centre",
+        "address": "Bandra West, Mumbai",
+        "distance": "1 km from Bandra Fort",
+        "phone": "+91 22 2675 1000",
+        "rating": 4.6
+      }
+    ]
+  },
+  "jaipur": {
+    "city_name": "Jaipur",
+    "lat": 26.9124,
+    "lon": 75.7873,
+    "places": [
+      {
+        "name": "Amber Fort & Palace",
+        "category": "Historical",
+        "rating": 4.8,
+        "address": "Amer, Jaipur, Rajasthan",
+        "lat": 26.9855,
+        "lon": 75.8513,
+        "duration": "3 hours",
+        "reason": "Majestic hilltop fort built with yellow and pink sandstone overlooking Maota Lake."
+      },
+      {
+        "name": "Hawa Mahal (Palace of Winds)",
+        "category": "Architecture / Culture",
+        "rating": 4.6,
+        "address": "Badi Choupad, Pink City, Jaipur",
+        "lat": 26.9239,
+        "lon": 75.8267,
+        "duration": "1.5 hours",
+        "reason": "Famous 5-story honeycomb facade constructed for royal women to view street festivals."
+      },
+      {
+        "name": "City Palace Jaipur",
+        "category": "Historical / Museum",
+        "rating": 4.6,
+        "address": "Jaleb Chowk, Jaipur",
+        "lat": 26.9258,
+        "lon": 75.8237,
+        "duration": "2.5 hours",
+        "reason": "Royal residence featuring courtyards, gardens, and royal artifact museums."
+      },
+      {
+        "name": "Jantar Mantar Observatory",
+        "category": "Historical / Science",
+        "rating": 4.5,
+        "address": "Gangori Bazaar, Jaipur",
+        "lat": 26.9247,
+        "lon": 75.8246,
+        "duration": "1.5 hours",
+        "reason": "UNESCO World Heritage site featuring 19 monumental astronomical instruments."
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "LMB (Laxmi Misthan Bhandar)",
+        "cuisine": "Rajasthani Vegetarian Thali & Sweets",
+        "rating": 4.5,
+        "address": "Johari Bazaar, Pink City, Jaipur",
+        "price_category": "Moderate (₹700 for two)",
+        "reason": "Heritage restaurant renowned for authentic Dal Baati Churma and Ghewar."
+      },
+      {
+        "name": "1135 AD - Amer Fort",
+        "cuisine": "Royal Rajasthani & Mughlai Fine Dining",
+        "rating": 4.7,
+        "address": "Level 2, Jaleb Chowk, Amer Fort, Jaipur",
+        "price_category": "Luxury (₹3000 for two)",
+        "reason": "Dine like royalty inside Amer Fort surrounded by silver leaf mirrors and live Sarangi music."
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Rambagh Palace Jaipur",
+        "rating": 4.9,
+        "address": "Bhawani Singh Road, Jaipur",
+        "estimated_price": "₹32,000/night",
+        "distance": "3 km from City Palace",
+        "reason": "Former residence of the Maharaja of Jaipur, ranked among top luxury heritage hotels in the world."
+      },
+      {
+        "name": "Shahpura House Heritage Hotel",
+        "rating": 4.5,
+        "address": "Devi Marg, Bani Park, Jaipur",
+        "estimated_price": "₹4,500/night",
+        "distance": "2 km from Jaipur Railway Station",
+        "reason": "Authentic Rajputana haveli offering traditional hospitality and rooftop dining."
+      }
+    ],
+    "healthcare": [
+      {
+        "name": "Fortis Escorts Hospital Jaipur",
+        "address": "Jawaharlal Nehru Marg, Malviya Nagar, Jaipur",
+        "distance": "6 km from Pink City",
+        "phone": "+91 141 254 7000",
+        "rating": 4.6
+      }
+    ]
+  },
+  "paris": {
+    "city_name": "Paris",
+    "lat": 48.8566,
+    "lon": 2.3522,
+    "places": [
+      {
+        "name": "Eiffel Tower",
+        "category": "Monument / Photography",
+        "rating": 4.8,
+        "address": "Champ de Mars, 5 Avenue Anatole France, Paris",
+        "lat": 48.8584,
+        "lon": 2.2945,
+        "duration": "3 hours",
+        "reason": "World-famous wrought-iron lattice tower providing panoramic city views."
+      },
+      {
+        "name": "Louvre Museum",
+        "category": "Culture / Museum",
+        "rating": 4.8,
+        "address": "Rue de Rivoli, Paris",
+        "lat": 48.8606,
+        "lon": 2.3376,
+        "duration": "4 hours",
+        "reason": "The world's largest art museum housing the Mona Lisa and Venus de Milo."
+      },
+      {
+        "name": "Cathédrale Notre-Dame de Paris",
+        "category": "Historical / Architecture",
+        "rating": 4.7,
+        "address": "6 Parvis Notre-Dame, Paris",
+        "lat": 48.8530,
+        "lon": 2.3499,
+        "duration": "1.5 hours",
+        "reason": "Masterpiece of French Gothic architecture situated on the Île de la Cité."
+      },
+      {
+        "name": "Arc de Triomphe & Champs-Élysées",
+        "category": "Monument / Shopping",
+        "rating": 4.7,
+        "address": "Place Charles de Gaulle, Paris",
+        "lat": 48.8738,
+        "lon": 2.2950,
+        "duration": "2 hours",
+        "reason": "Iconic triumphal arch commanding the world's most famous avenue."
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Le Train Bleu",
+        "cuisine": "Classic French Fine Dining",
+        "rating": 4.6,
+        "address": "Gare de Lyon, Place Louis-Armand, Paris",
+        "price_category": "Luxury (€120 for two)",
+        "reason": "Historic Belle Époque restaurant offering classic French roast lamb and souffle."
+      },
+      {
+        "name": "Bistrot Paul Bert",
+        "cuisine": "Traditional French Bistro",
+        "rating": 4.5,
+        "address": "18 Rue Paul Bert, 75011 Paris",
+        "price_category": "Moderate (€60 for two)",
+        "reason": "Cozy Parisian bistro famous for steak frites, grand wines, and Paris-Brest dessert."
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Ritz Paris",
+        "rating": 4.9,
+        "address": "15 Place Vendôme, Paris",
+        "estimated_price": "₹95,000/night",
+        "distance": "500m from Louvre Museum",
+        "reason": "World-famous 5-star grand luxury hotel overlooking Place Vendôme."
+      },
+      {
+        "name": "Hôtel Plaza Étoile",
+        "rating": 4.4,
+        "address": "21 Avenue Wagram, Paris",
+        "estimated_price": "₹14,000/night",
+        "distance": "200m from Arc de Triomphe",
+        "reason": "Charming Parisian boutique stay near Metro connections and dining."
+      }
+    ],
+    "healthcare": [
+      {
+        "name": "Hôpital Pitié-Salpêtrière",
+        "address": "47-83 Boulevard de l'Hôpital, Paris",
+        "distance": "3 km from city center",
+        "phone": "+33 1 42 16 00 00",
+        "rating": 4.6
+      }
+    ]
+  },
+  "tokyo": {
+    "city_name": "Tokyo",
+    "lat": 35.6762,
+    "lon": 139.6503,
+    "places": [
+      {
+        "name": "Senso-ji Temple",
+        "category": "Historical / Culture",
+        "rating": 4.7,
+        "address": "2-3-1 Asakusa, Taito City, Tokyo",
+        "lat": 35.7148,
+        "lon": 139.7967,
+        "duration": "2 hours",
+        "reason": "Tokyo's oldest and most famous Buddhist temple with Kaminarimon Gate."
+      },
+      {
+        "name": "Shibuya Crossing & Hachiko Statue",
+        "category": "Culture / Sightseeing",
+        "rating": 4.6,
+        "address": "Shibuya City, Tokyo",
+        "lat": 35.6595,
+        "lon": 139.7004,
+        "duration": "1.5 hours",
+        "reason": "World's busiest pedestrian intersection illuminated by giant neon screens."
+      },
+      {
+        "name": "Tokyo Skytree",
+        "category": "Modern / Photography",
+        "rating": 4.6,
+        "address": "1-1-2 Oshiage, Sumida City, Tokyo",
+        "lat": 35.7101,
+        "lon": 139.8107,
+        "duration": "2.5 hours",
+        "reason": "Tallest structure in Japan featuring 360-degree observation decks."
+      },
+      {
+        "name": "Meiji Jingu Shrine",
+        "category": "Nature / Culture",
+        "rating": 4.7,
+        "address": "1-1 Yoyogikamizonocho, Shibuya City, Tokyo",
+        "lat": 35.6764,
+        "lon": 139.6993,
+        "duration": "2 hours",
+        "reason": "Serene Shinto shrine enclosed in a tranquil 170-acre forest."
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Ichiran Ramen Asakusa",
+        "cuisine": "Authentic Tonkotsu Ramen",
+        "rating": 4.6,
+        "address": "Asakusa, Taito City, Tokyo",
+        "price_category": "Budget (¥2,000 for two)",
+        "reason": "Famous solo dining booths serving rich, flavorful tonkotsu ramen."
+      },
+      {
+        "name": "Sushi Saino Ginza",
+        "cuisine": "Omakase Sushi & Japanese Seafood",
+        "rating": 4.8,
+        "address": "Ginza, Chuo City, Tokyo",
+        "price_category": "Luxury (¥18,000 for two)",
+        "reason": "Exquisite Michelin-recommended omakase sushi master dining."
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Park Hyatt Tokyo",
+        "rating": 4.8,
+        "address": "3-7-1-2 Nishi-Shinjuku, Shinjuku City, Tokyo",
+        "estimated_price": "₹42,000/night",
+        "distance": "Overlooking Shinjuku skyline",
+        "reason": "Iconic luxury hotel featured in Lost in Translation."
+      },
+      {
+        "name": "Hotel Gracery Shinjuku",
+        "rating": 4.4,
+        "address": "1-19-1 Kabukicho, Shinjuku City, Tokyo",
+        "estimated_price": "₹9,800/night",
+        "distance": "In the heart of Shinjuku",
+        "reason": "Modern hotel famous for its life-sized Godzilla head on the terrace."
+      }
+    ],
+    "healthcare": [
+      {
+        "name": "St. Luke's International Hospital",
+        "address": "9-1 Akashicho, Chuo City, Tokyo",
+        "distance": "2 km from Ginza",
+        "phone": "+81 3-3541-5151",
+        "rating": 4.7
+      }
+    ]
+  },
+  "kyoto": {
+    "city_name": "Kyoto",
+    "lat": 35.0116,
+    "lon": 135.7681,
+    "places": [
+      {
+        "name": "Fushimi Inari Taisha",
+        "category": "Historical / Culture",
+        "rating": 4.8,
+        "address": "68 Fukakusa Yabunouchicho, Fushimi Ward, Kyoto",
+        "lat": 34.9671,
+        "lon": 135.7727,
+        "duration": "3 hours",
+        "reason": "Famous Shinto shrine renowned for thousands of vermilion torii gates."
+      },
+      {
+        "name": "Kinkaku-ji (The Golden Pavilion)",
+        "category": "Historical / Architecture",
+        "rating": 4.7,
+        "address": "1 Kinkakujicho, Kita Ward, Kyoto",
+        "lat": 35.0394,
+        "lon": 135.7292,
+        "duration": "1.5 hours",
+        "reason": "Zen Buddhist temple whose top two floors are completely covered in gold leaf."
+      },
+      {
+        "name": "Arashiyama Bamboo Grove",
+        "category": "Nature / Photography",
+        "rating": 4.7,
+        "address": "Ukyo Ward, Kyoto",
+        "lat": 35.0170,
+        "lon": 135.6713,
+        "duration": "2 hours",
+        "reason": "Enchanting towering bamboo forest with sunbeams filtering through stalks."
+      },
+      {
+        "name": "Kiyomizu-dera Temple",
+        "category": "Culture / Viewpoint",
+        "rating": 4.8,
+        "address": "1-294 Kiyomizu, Higashiyama Ward, Kyoto",
+        "lat": 34.9949,
+        "lon": 135.7850,
+        "duration": "2 hours",
+        "reason": "Historic wooden stage offering sweeping views of Kyoto and cherry blossoms."
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Gion Karyo",
+        "cuisine": "Traditional Kaiseki Multi-Course",
+        "rating": 4.7,
+        "address": "Gion, Higashiyama Ward, Kyoto",
+        "price_category": "Luxury (¥12,000 for two)",
+        "reason": "Refined traditional Kyoto Kaiseki dining in an authentic machiya townhouse."
+      },
+      {
+        "name": "Ramen Sen-no-Kaze Kyoto",
+        "cuisine": "Kyoto Style Pork & Seafood Ramen",
+        "rating": 4.5,
+        "address": "Kawaramachi, Nakagyo Ward, Kyoto",
+        "price_category": "Budget (¥2,200 for two)",
+        "reason": "Cozy local ramen shop serving rich savory broth."
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Hiiragiya Ryokan",
+        "rating": 4.9,
+        "address": "Nakai-cho, Anekoji-agaru, Nakagyo Ward, Kyoto",
+        "estimated_price": "₹38,000/night",
+        "distance": "Central Kyoto",
+        "reason": "Historic 200-year-old traditional Ryokan with Japanese gardens and Kaiseki room service."
+      },
+      {
+        "name": "Kyoto Granbell Hotel",
+        "rating": 4.5,
+        "address": "Yamatocho, Higashiyama Ward, Kyoto",
+        "estimated_price": "₹8,500/night",
+        "distance": "Steps from Gion district",
+        "reason": "Blend of modern comfort and classic Japanese architecture in historic Gion."
+      }
+    ],
+    "healthcare": [
+      {
+        "name": "Kyoto University Hospital",
+        "address": "54 Shogoin Kawaharacho, Sakyo Ward, Kyoto",
+        "distance": "3 km from city center",
+        "phone": "+81 75-751-3111",
+        "rating": 4.6
       }
     ]
   }

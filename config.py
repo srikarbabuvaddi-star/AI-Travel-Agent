@@ -13,5 +13,5 @@ class Config:
     REQUEST_TIMEOUT = 10  # seconds for HTTP calls
     
     # Supported LLM model
-    DEFAULT_MODEL = "gemini-2.5-flash"
+    DEFAULT_MODEL = "gemini-2.0-flash"
     FALLBACK_MODEL = "gemini-1.5-flash"

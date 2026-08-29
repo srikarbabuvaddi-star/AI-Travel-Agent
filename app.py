@@ -289,12 +289,17 @@ def run_streamlit_app():
         with tabs[3]:
             st.markdown(f"### 📅 Weather-Aware Day-by-Day Itinerary")
             for day_item in plan.get("itinerary", []):
-                with st.expander(f"📌 {day_item.get('day')} ({day_item.get('date')}) - {day_item.get('weather_summary')}", expanded=True):
-                    st.caption(day_item.get("weather_note"))
+                day_title = day_item.get("title", f"{day_item.get('day')} ({day_item.get('date')})")
+                with st.expander(f"📌 {day_title} — {day_item.get('weather_summary')}", expanded=True):
+                    st.caption(f"🗓️ Date: {day_item.get('date')} | {day_item.get('weather_note')}")
                     st.markdown(f"{day_item.get('morning')}")
                     st.markdown(f"{day_item.get('afternoon')}")
                     st.markdown(f"{day_item.get('evening')}")
-                    st.markdown(f"🍽️ **Featured Dining:** {day_item.get('dining')}")
+                    
+                    places_tags = ", ".join([f"`{p}`" for p in day_item.get("places_visited", []) if p])
+                    if places_tags:
+                        st.markdown(f"📍 **Attractions Visited:** {places_tags}")
+                    st.markdown(f"🍽️ **Dining Highlights:** {day_item.get('dining')}")
     
         # TAB 5: PLACES
         with tabs[4]:
@@ -587,8 +592,16 @@ def handler(environ, start_response=None):
 app = handler
 application = handler
 
-# Execute Streamlit UI only when running under Streamlit runtime context
-if st.runtime.exists():
-    run_streamlit_app()
+if __name__ == "__main__":
+    if st.runtime.exists():
+        run_streamlit_app()
+    else:
+        import sys
+        from streamlit.web import cli as stcli
+        sys.argv = ["streamlit", "run", __file__]
+        sys.exit(stcli.main())
+else:
+    if st.runtime.exists():
+        run_streamlit_app()
 
 
