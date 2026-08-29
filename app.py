@@ -740,9 +740,7 @@ app = handler
 application = handler
 
 if __name__ == "__main__":
-    server = HTTPServer(('0.0.0.0', 8501), lambda *args: SimpleHTTPRequestHandler(*args))
-    print("AI Smart Travel Agent Web App running on http://localhost:8501")
-    # For local execution using WSGI test server
     from wsgiref.simple_server import make_server
+    print("AI Smart Travel Agent Web App running on http://localhost:8501")
     httpd = make_server('0.0.0.0', 8501, handler)
     httpd.serve_forever()
